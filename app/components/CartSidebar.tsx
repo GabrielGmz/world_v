@@ -22,8 +22,8 @@ export default function CartSidebar() {
     message += `\n*Total a pagar: $${cartTotal.toFixed(2)}*`;
 
     // Reemplaza con tu número (El 503 es el código de país, ajústalo si es necesario)
-    const phoneNumber = "503 64427053"; 
-    const whatsappUrl = `https://wa.me/?text=urlencodedtext.${encodeURIComponent(message)}`;
+    const phoneNumber = "+50364427053"; 
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     
     window.open(whatsappUrl, '_blank');
     setIsCheckoutOpen(false);
