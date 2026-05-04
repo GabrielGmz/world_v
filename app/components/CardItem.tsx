@@ -97,7 +97,7 @@ export default function CardItem({
 
             {/* Columna Imagen (40% pantalla en móvil, 50% en desktop) */}
             <div className="relative w-full md:w-1/2 h-[40vh] md:h-auto bg-gray-100 shrink-0">
-              <Image src={activeVariant.imageSrc} alt={title} fill className="object-cover" />
+              <Image src={activeVariant.imageSrc} alt={title} fill className="object-cover " />
             </div>
 
             {/* Columna Contenido (Scrollable) */}
