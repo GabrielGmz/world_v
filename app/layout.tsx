@@ -19,6 +19,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "World Of Varieties",
   description: "Tienda de ropa personalizada con diseños únicos y estilos variados. ¡Explora nuestra colección y encuentra tu estilo perfecto!",
+  openGraph: {
+    images: ["./logo.png"],
+  },
 };
 
 export default function RootLayout({
