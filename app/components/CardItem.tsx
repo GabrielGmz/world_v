@@ -40,13 +40,18 @@ export default function CardItem({
   const handleAddToCart = () => {
     // Limpiamos el precio (quitar el "$" y pasarlo a número)
     const numericPrice = parseFloat(precio.replace('$', ''));
+    const numericId = Array.from(`${title}-${activeVariant.colorName}`).reduce(
+      (acc, char) => acc + char.charCodeAt(0),
+      0
+    );
     
     addToCart({
-      id: `${title}-${activeVariant.colorName}`, // ID único por producto y estilo
-      title: title,
+      id: numericId, // ID único por producto y estilo
+      name: title,
       price: numericPrice,
-      variant: activeVariant,
-      quantity: 1
+      quantity: 1,
+      category: title,
+      image: activeVariant.imageSrc
     });
     setIsModalOpen(false); // Cerramos el modal de detalles
   };
@@ -60,7 +65,7 @@ export default function CardItem({
       {/* TARJETA PRINCIPAL INMERSIVA */}
       <div 
         onClick={toggleModal}
-        className="relative w-full sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1.25rem)] lg:w-[calc(25%-1.25rem)] aspect-[4/5] min-w-[250px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer group"
+        className="relative w-[375px] sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1.25rem)] lg:w-[calc(25%-1.25rem)] aspect-[4/5] min-w-[250px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer group"
       >
         <Image 
           src={activeVariant.imageSrc} 

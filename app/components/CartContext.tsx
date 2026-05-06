@@ -2,18 +2,14 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-// Tipos de datos
-type Variant = {
-  colorName: string;
-  numberStyle: string | number;
-  imageSrc: string;
-};
-
-type CartItemType = {
-  id: string;
-  title: string;
+// 1. NUEVA ESTRUCTURA LIMPIA
+// Es idéntica a los productos de tu db.ts, pero le sumamos la propiedad "quantity"
+export type CartItemType = {
+  id: number; // Ahora es number, igual que en tu db.ts
+  name: string; // Cambiamos title por name
+  category: string; // Reemplazamos el complejo Variant por category
   price: number;
-  variant: Variant;
+  image: string; // La imagen directa en la raíz del objeto
   quantity: number;
 };
 
@@ -22,15 +18,15 @@ type CartContextType = {
   isCartOpen: boolean;
   setIsCartOpen: (isOpen: boolean) => void;
   addToCart: (item: CartItemType) => void;
-  removeFromCart: (id: string) => void;
-  updateQuantity: (id: string, amount: number) => void;
+  removeFromCart: (id: number) => void; // Actualizado a number
+  updateQuantity: (id: number, amount: number) => void; // Actualizado a number
   cartTotal: number;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  // 1. Inicializamos desde localStorage solo en el navegador
+  // Inicializamos desde localStorage solo en el navegador
   const [cart, setCart] = useState<CartItemType[]>(() => {
     if (typeof window === 'undefined') return [];
 
@@ -44,9 +40,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
       return [];
     }
   });
+  
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // 2. GUARDAR EN LOCALSTORAGE CADA VEZ QUE EL CARRITO CAMBIE
+  // GUARDAR EN LOCALSTORAGE CADA VEZ QUE EL CARRITO CAMBIE
   useEffect(() => {
     localStorage.setItem('worldv_cart', JSON.stringify(cart));
   }, [cart]);
@@ -56,7 +53,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const existingItem = prev.find(item => item.id === newItem.id);
       if (existingItem) {
         return prev.map(item => 
-          item.id === newItem.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === newItem.id ? { ...item, quantity: item.quantity + newItem.quantity } : item
         );
       }
       return [...prev, newItem];
@@ -64,14 +61,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setIsCartOpen(true);
   };
 
-  const removeFromCart = (id: string) => {
+  const removeFromCart = (id: number) => {
     setCart((prev) => prev.filter(item => item.id !== id));
   };
 
-  const updateQuantity = (id: string, amount: number) => {
+  const updateQuantity = (id: number, amount: number) => {
     setCart((prev) => prev.map(item => {
       if (item.id === id) {
-        const newQuantity = item.quantity + amount;
+        // En lugar de sumar o restar por amount, establecemos la cantidad exacta
+        // Esto evita bugs si el usuario le da clics muy rápido
+        const newQuantity = amount; 
         return { ...item, quantity: newQuantity > 0 ? newQuantity : 1 };
       }
       return item;

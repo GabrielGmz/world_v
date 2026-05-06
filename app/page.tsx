@@ -193,15 +193,12 @@ export default function Home() {
       <div className="w-full max-w-6xl">
         {/* 3. Título Principal: Más delicado (text-3xl), sin ser gigantesco, pero manteniendo la elegancia */}
         <h2 className="text-3xl md:text-4xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 mb-10 drop-shadow-sm tracking-tight">
-          Nuestros Productos
+          Productos Destacados
         </h2>
 
         <div>
           {/* 4. Categoría 1: Letras más finas y grises, línea divisoria súper delgadita (h-[1px]) */}
           <div className="flex items-center mb-6">
-            <h3 className="text-xl font-bold text-gray-700 tracking-tight">
-              Belleza
-            </h3>
             <div className="ml-4 flex-grow h-[1px] bg-gradient-to-r from-pink-200 to-transparent opacity-70"></div>
           </div>
 
@@ -235,18 +232,7 @@ export default function Home() {
               precio="$2.99"
               variants={glossVariants}
             />
-          </div>
-
-          {/* Categoría 2 */}
-          <div className="flex items-center mb-6 mt-2">
-            <h3 className="text-xl font-bold text-gray-700 tracking-tight">
-              Accesorios
-            </h3>
-            <div className="ml-4 flex-grow h-[1px] bg-gradient-to-r from-pink-200 to-transparent opacity-70"></div>
-          </div>
-
-          <div className="flex flex-wrap justify-center sm:justify-start gap-5 pb-8">
-            <CardItem
+                        <CardItem
               title="Anillos"
               description="Nuestros accesorios de moda son el complemento perfecto para cualquier outfit, con diseños elegantes y modernos."
               descriptionFull="Nuestros accesorios de moda son el complemento perfecto para cualquier outfit. Con diseños elegantes y modernos, estos accesorios añaden un toque de estilo a tu look diario. Desde collares delicados hasta pulseras llamativas, nuestra colección ofrece opciones para cada ocasión. ¡Eleva tu estilo con nuestros accesorios de moda y haz que cada día sea una declaración de moda!"
@@ -260,17 +246,7 @@ export default function Home() {
               precio="$2.99"
               variants={moñoVariants}
             />
-          </div>
-
-<div className="flex items-center mb-6 mt-2">
-            <h3 className="text-xl font-bold text-gray-700 tracking-tight">
-              Obsequios
-            </h3>
-            <div className="ml-4 flex-grow h-[1px] bg-gradient-to-r from-pink-200 to-transparent opacity-70"></div>
-          </div>
-
-          <div className="flex flex-wrap justify-center sm:justify-start gap-5 pb-8">
-            <CardItem
+                        <CardItem
               title="Tulipanes de crochét"
               description="Nuestros accesorios de moda son el complemento perfecto para cualquier outfit, con diseños elegantes y modernos."
               descriptionFull="Nuestros accesorios de moda son el complemento perfecto para cualquier outfit. Con diseños elegantes y modernos, estos accesorios añaden un toque de estilo a tu look diario. Desde collares delicados hasta pulseras llamativas, nuestra colección ofrece opciones para cada ocasión. ¡Eleva tu estilo con nuestros accesorios de moda y haz que cada día sea una declaración de moda!"
