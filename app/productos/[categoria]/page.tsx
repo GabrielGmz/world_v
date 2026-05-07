@@ -30,15 +30,15 @@ export default function CategoriaPage({ params }: { params: Promise<{ categoria:
             <p className="text-sm mt-1">¡Vuelve pronto para ver nuestras novedades aesthetic!</p>
         </div>
       ) : (
-        // Grid estricto: 1 en móviles pequeños, 2 en móviles grandes/tablets, 4 en PC
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        // CONTENEDOR FLEX: justify-center ayuda a que las tarjetas queden al medio si no llenan la fila
+        <div className="flex flex-wrap justify-center gap-6">
           
           {/* MAPEAMOS LOS PRODUCTOS FILTRADOS */}
           {productosFiltrados.map((producto: Producto) => (
             
-            // CORRECCIÓN RADICAL: Altura fija (h-[350px] en móvil, h-[420px] en PC)
-            // Esto evita que se aplasten y asegura que parezcan tarjetas de verdad
-            <div key={producto.id} className="relative w-full h-[350px] sm:h-[420px] rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group">
+            // TARJETA FLEX: Usamos un ancho fijo/base (w-full sm:w-[300px] md:w-[320px])
+            // flex-grow-0 previene que una sola tarjeta se estire ocupando todo si está sola en la fila
+            <div key={producto.id} className="relative w-full sm:w-[300px] md:w-[320px] h-[350px] sm:h-[420px] flex-grow-0 flex-shrink-0 rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group">
               
               {/* Imagen de fondo */}
               <Image 
@@ -68,11 +68,11 @@ export default function CategoriaPage({ params }: { params: Promise<{ categoria:
                     ${producto.price.toFixed(2)}
                   </p>
                   
-                  {/* Botón Ver Opciones */}
+                  {/* Botón */}
                   <button 
                     type="button"
                     onClick={() => addToCart({ ...producto, quantity: 1 })} 
-                    className="px-4 py-2 bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white text-[10px] sm:text-xs font-bold tracking-widest rounded-full uppercase transition-colors"
+                    className="px-2 py-2 bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white text-[10px] sm:text-xs font-bold tracking-widest rounded-full uppercase transition-colors"
                   >
                     Agregar al Carrito
                   </button>
