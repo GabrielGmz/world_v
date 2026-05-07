@@ -65,7 +65,7 @@ export default function CardItem({
       {/* TARJETA PRINCIPAL INMERSIVA */}
       <div 
         onClick={toggleModal}
-        className="relative w-[375px] sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1.25rem)] lg:w-[calc(25%-1.25rem)] aspect-[4/5] min-w-[250px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer group"
+        className="relative w-[360px] sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1.25rem)] lg:w-[calc(25%-1.25rem)] aspect-[4/5] min-w-[250px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer group"
       >
         <Image 
           src={activeVariant.imageSrc} 
