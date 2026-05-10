@@ -1,13 +1,29 @@
 "use client";
 
+// 1. Agregamos useState y useEffect aquí
+import { useState, useEffect } from 'react';
 import { useCart } from './CartContext';
 
 export default function FloatingCart() {
   const { setIsCartOpen, cart } = useCart();
+  
+  // 2. Agregamos el estado para saber si ya cargó el navegador
+  const [isMounted, setIsMounted] = useState(false);
+
+  // 3. Le decimos que ya montó
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setIsMounted(true));
+
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   // Calcula el total de ítems en el carrito
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+  // 4. Si es el servidor de Next.js, no dibujamos nada aún para evitar el error
+  if (!isMounted) return null;
+
+  // ¡TU CÓDIGO INTACTO A PARTIR DE AQUÍ!
   return (
     <button
       onClick={() => setIsCartOpen(true)}

@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: ["./logo.png"],
   },
+  metadataBase: new URL("https://world-v.vercel.app"),
 };
 
 export default function RootLayout({

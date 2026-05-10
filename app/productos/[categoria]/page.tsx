@@ -33,13 +33,13 @@ export default function CategoriaPage({ params }: { params: Promise<{ categoria:
         // CONTENEDOR FLEX: Centrado en móviles, alineado a la izquierda en PC
         <div className="flex flex-wrap justify-center md:justify-start gap-6">
           
-          {/* MAPEAMOS LOS PRODUCTOS FILTRADOS */}
-          {productosFiltrados.map((producto: Producto) => (
+          {/* MAPEAMOS LOS PRODUCTOS FILTRADOS (Agregamos el index aquí) */}
+          {productosFiltrados.map((producto: Producto, index: number) => (
             
             // TARJETA STRICTA: 
             // w-[360px] h-[420px] sin prefijos (sm:, md:). Siempre medirá eso.
             // flex-none: Bloquea cualquier intento del navegador de encogerla.
-            <div key={producto.id} className="relative flex-none w-[360px] h-[420px] rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group">
+            <div key={producto.id} className="relative flex-none w-[275px] h-[375px] rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group">
               
               {/* Imagen de fondo */}
               <Image 
@@ -47,6 +47,7 @@ export default function CategoriaPage({ params }: { params: Promise<{ categoria:
                 alt={producto.name} 
                 fill
                 unoptimized
+                priority={index < 4} // <-- AQUÍ ESTÁ LA OPTIMIZACIÓN LCP
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out" 
               />
               
@@ -57,7 +58,7 @@ export default function CategoriaPage({ params }: { params: Promise<{ categoria:
               <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
                 
                 {/* Título */}
-                <h3 className="font-bold text-white text-2xl line-clamp-2 leading-tight mb-3 drop-shadow-md">
+                <h3 className="font-bold text-white text-xl line-clamp-2 leading-tight mb-3 drop-shadow-md">
                   {producto.name}
                 </h3>
                 
@@ -65,7 +66,7 @@ export default function CategoriaPage({ params }: { params: Promise<{ categoria:
                 <div className="flex items-center justify-between w-full">
                   
                   {/* Precio */}
-                  <p className="text-[#ff66c4] font-extrabold text-2xl drop-shadow-md">
+                  <p className="text-[#ff66c4] font-extrabold text-md drop-shadow-md">
                     ${producto.price.toFixed(2)}
                   </p>
                   
@@ -73,9 +74,13 @@ export default function CategoriaPage({ params }: { params: Promise<{ categoria:
                   <button 
                     type="button"
                     onClick={() => addToCart({ ...producto, quantity: 1 })} 
-                    className="px-4 py-2 bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white text-xs font-bold tracking-widest rounded-full uppercase transition-colors"
+                    aria-label={`Agregar ${producto.name} al carrito`}
+                    className="px-8 py-2 bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white text-xs font-bold tracking-widest rounded-full uppercase transition-colors"
                   >
-                    Agregar al Carrito
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      {/* Corregimos fill-rule por fillRule para evitar el warning de React */}
+                      <path fillRule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5z"/>
+                    </svg>
                   </button>
                   
                 </div>
