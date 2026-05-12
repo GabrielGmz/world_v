@@ -52,7 +52,7 @@ export default function CategoriaPage({ params }: { params: Promise<{ categoria:
               />
               
               {/* Degradado oscuro estricto de abajo hacia arriba */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent pointer-events-none"></div>
               
               {/* Contenedor anclado estrictamente al fondo */}
               <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
